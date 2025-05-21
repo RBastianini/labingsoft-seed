@@ -39,5 +39,6 @@ RUN echo "xdebug.mode=debug \nxdebug.discover_client_host=1" >> /usr/local/etc/p
 RUN mkdir -p /home/www-data && chown www-data /home/www-data
 # Use the default development configuration
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-
+# Increase PHP memory limit
+RUN sed -ri -e 's/memory_limit = 128M/memory_limit = 256M' "$PHP_INI_DIR/php.ini"
 WORKDIR /var/www/files
